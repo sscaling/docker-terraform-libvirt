@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  terraform:
+    image: terraform
+    build: .
+    volumes:
+    - .:/opt/project
+    working_dir: /opt/project
+    environment:
+    - TF_LOG=ERROR
+
