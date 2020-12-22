@@ -15,10 +15,13 @@ FROM debian:buster
 RUN apt-get update && \
 	apt-get install -y --no-install-recommends \
 		ssh=1:7.9p1-10+deb10u2 \
+		xorriso=1.5.0-1 \
 		libvirt-clients=5.0.0-4+deb10u1 && \
 	apt-get clean && \
         rm -rf /var/cache/apt/lists
 
+# terraform-provider-libvirt requires mkisofs which is no longer supported
+COPY pseudo-mkisofs /usr/bin/mkisofs
 COPY --from=builder /usr/bin/terraform /usr/bin/terraform
 COPY --from=builder /go/src/github.com/dmacvicar/terraform-provider-libvirt/terraform-provider-libvirt /root/.terraform.d/plugins/registry.terraform.io/dmacvicar/libvirt/0.6.3/linux_amd64/
 
