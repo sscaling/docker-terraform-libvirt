@@ -8,6 +8,8 @@ This is provided ontop of the [debian:buster](https://hub.docker.com/_/debian/) 
 
 Uses a multi-stage build to get the terraform binary and build the terraform-provider-libvirt binary.
 
+It installs a `mkisofs` wrapper because the provider requires this for building cloud-init ISOs.
+
 ## Building
 
 ```
